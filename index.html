@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="200" height="200" style="background-color: #000000"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      context.clearRect(0,0,canvas.width,canvas.height);
+      context.strokeStyle = '#ED1963';
+      function newjsab(){
+          return {
+              draw:function() {
+                  context.clearRect(0,0,canvas.width,canvas.height);
+                  context.save();
+                  context.translate(100,100);
+                  var elapsed = new Date().getTime()/1000 * 1.0;
+                  if (elapsed % 1.0 < .5 ){
+                      context.rotate(-1/4*Math.PI)
+                  }
+                  else{
+                      context.rotate(1/8*Math.PI);
+                  }
+
+                  if (elapsed % 1.0 < .25 || (elapsed % 1.0 > .5 && elapsed % 1.0 < .75)) {
+                      context.rotate(Math.random()*.1*Math.PI);
+                  }
+                  if (elapsed % .5 < .05){
+                      canvas.style = "background-color: #FF38AA"
+                  }
+                  else {
+                      canvas.style = "background-color: #000000"
+                  }
+
+                  context.scale(Math.abs(Math.sin(elapsed*Math.PI*2)) * .5 + .75,Math.abs(Math.sin(elapsed*Math.PI*2)) * .5 + .75)
+
+                  //if (elapsed % )
+                  context.strokeStyle = '#ED1963';
+
+                  //draw the circle for the head
+                  context.save();
+                  context.lineWidth = 3;
+                  var head = new Path2D();
+                  head.arc(0,0,50,0,2*Math.PI);
+                  context.stroke(head);
+                  context.restore();
+
+                  //eyes
+                  context.save()
+                  var eyes = new Path2D();
+                  context.fillStyle = '#FFFFFF';
+                  context.lineWidth = 7;
+                  eyes.arc(-20,-5,15,0,2*Math.PI);
+                  eyes.moveTo(30,-5);
+                  eyes.arc(20,-5,10,0,2*Math.PI)
+                  context.stroke(eyes);
+                  context.fill(eyes);
+                  context.restore()
+
+                  //teeth
+                  context.save();
+                  context.lineWidth = 1;
+                  context.fillStyle = '#ED1963';
+                  var teeth = new Path2D();
+                  context.rotate(.15*Math.PI);
+                  teeth.arc(0,0,40,0,Math.PI*.7)
+                  context.stroke(teeth);
+                  context.fill(teeth);
+                  context.restore();
+
+                  //teeth gaps
+                  context.save()
+                  context.rotate(.5*Math.PI);
+                  context.lineWidth = 4;
+                  if (elapsed % .5 < .05){
+                      context.strokeStyle = '#FF38AA';
+                  }
+                  else {
+                      context.strokeStyle = '#000000';
+                  }
+                  context.strokeStyle = '#000000';
+                  context.translate(15,0);
+                  var teethGaps = new Path2D();
+                  teethGaps.moveTo(0,0);
+                  teethGaps.lineTo(30,0);
+                  teethGaps.moveTo(0,-10);
+                  teethGaps.lineTo(30,-10);
+                  teethGaps.moveTo(0,-20);
+                  teethGaps.lineTo(25,-20);
+                  teethGaps.moveTo(0,-30);
+                  teethGaps.lineTo(20,-30);
+                  teethGaps.moveTo(0,10);
+                  teethGaps.lineTo(30,10);
+                  teethGaps.moveTo(0,20);
+                  teethGaps.lineTo(25,20);
+                  teethGaps.moveTo(0,30);
+                  teethGaps.lineTo(20,30);
+                  context.stroke(teethGaps);
+                  context.restore();
+
+                  //"hair"
+                  context.save();
+                  context.fillStyle = '#ED1963';
+                  context.lineWidth = 1;
+                  //big hairs
+                  context.save();
+                  context.rotate(-.4*Math.PI);
+                  var bigHair = new Path2D();
+                  bigHair.moveTo(-10,-58);
+                  bigHair.lineTo(10,-58);
+                  bigHair.lineTo(0,-10*Math.sqrt(3)-58)
+                  bigHair.lineTo(-10,-58);
+                  context.stroke(bigHair);
+                  context.fill(bigHair);
+                  context.restore();
+
+                  context.save()
+                  context.rotate(.1*Math.PI);
+                  bigHair.moveTo(-10,-58);
+                  bigHair.lineTo(10,-58);
+                  bigHair.lineTo(0,-10*Math.sqrt(3)-58)
+                  bigHair.lineTo(-10,-58);
+                  context.stroke(bigHair);
+                  context.fill(bigHair);
+                  context.restore();
+
+                  //small hairs
+                  var smallHair = new Path2D();
+                  context.save();
+                  context.rotate(-.25*Math.PI);
+                  smallHair.moveTo(-5,-58);
+                  smallHair.lineTo(5,-58);
+                  smallHair.lineTo(0,-5*Math.sqrt(3)-58)
+                  smallHair.lineTo(-5,-58);
+                  context.stroke(smallHair);
+                  context.fill(smallHair);
+                  context.restore();
+
+                  context.save();
+                  context.rotate(-.12*Math.PI);
+                  smallHair.moveTo(-5,-58);
+                  smallHair.lineTo(5,-58);
+                  smallHair.lineTo(0,-5*Math.sqrt(3)-58)
+                  smallHair.lineTo(-5,-58);
+                  context.stroke(smallHair);
+                  context.fill(smallHair);
+                  context.restore();
+
+                  context.save();
+                  context.rotate(.25*Math.PI);
+                  smallHair.moveTo(-3,-58);
+                  smallHair.lineTo(3,-58);
+                  smallHair.lineTo(0,-3*Math.sqrt(3)-58)
+                  smallHair.lineTo(-3,-58);
+                  context.stroke(smallHair);
+                  context.fill(smallHair);
+                  context.restore();
+
+                  //done with hairs
+                  context.restore();
+
+                  context.restore();
+              }
+          }
+      }
+
+      function drawjsab(){
+          const jsab = newjsab();
+          jsab.draw();
+          window.requestAnimationFrame(drawjsab);
+      }
+      drawjsab()
+    </script>
+  </body>
+</html>
